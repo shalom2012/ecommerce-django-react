@@ -73,11 +73,8 @@ pipeline {
                     println "step 5 - Success - Push image to dockerhub"
                     println "================================================================================================================="
                      
-                    sh '''
-                    if [ "$(docker ps -q)" ]; then
-                        sudo docker kill $(docker ps -q)
-                        sudo docker rm $(docker ps -qa)
-                    fi
+                    
+
 
                     script {
                         withCredentials([string(credentialsId: "DockerHubPW", variable: 'DOCKERHUB_PASSWORD')]) {
@@ -90,6 +87,13 @@ pipeline {
                             build job: 'success_pipeline'
                         }
                     }
+                    sh '''
+                    if [ "$(docker ps -q)" ]; then
+                        sudo docker kill $(docker ps -q)
+                        sudo docker rm $(docker ps -qa)
+                    fi
+
+                    #sh 'docker run  ... new container 80:5000
                 }
 
                 failure {
@@ -99,7 +103,8 @@ pipeline {
                     println "================================================================================================================="
                     
                     script {
-                        build job: 'failure_pipeline'
+                        #build job: 'failure_pipeline'
+                        println ' tests failed'
                     }
                     
                 }
