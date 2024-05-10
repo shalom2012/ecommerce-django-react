@@ -77,9 +77,9 @@ pipeline {
                         withCredentials([string(credentialsId: "DockerHubPW", variable: 'DOCKERHUB_PASSWORD')]) {
                             sh """
                             sudo rm report.html
-                            docker login -u amitmenashe -p ${DOCKERHUB_PASSWORD}
-                            docker tag eshop amitmenashe/eshop
-                            docker push amitmenashe/eshop
+                            docker login -u shalom2012 -p ${DOCKERHUB_PASSWORD}
+                            docker tag eshop amitmenashe/ecommerce-django-react
+                            docker push shalom2012/ecommerce-django-react
                             """
                             build job: 'success_pipeline'
                         }
