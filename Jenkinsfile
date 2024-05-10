@@ -1,8 +1,5 @@
 pipeline {
-    agent {
-        label 'linAgent'
-    } 
-
+    agent any
     stages {
         stage('Pull from github') {
             steps {
